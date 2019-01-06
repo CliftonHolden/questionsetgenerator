@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          {% from 'includes/_formhelpers.html' import render_field %}
+          <form method="POST" action="">
+            <div class="form-group bold">
+              {{render_field(form.subject) }}
+              {{render_field(form.chapter) }}
+            </div>
+            <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+          </form>
+        </div>
+
+
+          <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th>#</th>
+                <th>Question</th>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>Topic</th>
+                <th>Difficulty</th>
+                <th>Marks</th>
+                <th>Answer</th>
+                <th>Option 1</th>
+                <th>Option 2</th>
+                <th>Option 3</th>
+                <th>Option 4</th>
+              </tr>
+            </thead>
+           <tbody>
+             {% for r in results %}
+               <tr>
+                 <td>
+                   <button type="button" class="btn btn-secondary" name="Edit" onclick="location.href='/edit/{{r['id']}}'"> Edit
+                   </button>
+                 </td>
+                 <td>
+                   <button type="button" class="btn btn-secondary" name="Delete" onclick="location.href='/delete/{{r['id']}}'"> Delete
+                   </button>
+                 </td>
+                 <td>{{r['id']}}</td>
+                 <td>{{r['question']}}</td>
+                 <td>{{r['subject']}}</td>
+                 <td>{{r['chapter']}}</td>
+                 <td>{{r['topic']}}</td>
+                 <td>{{r['difficulty']}}</td>
+                 <td>{{r['marks']}}</td>
+                 <td>{{r['answer']}}</td>
+                 <td>{{r['option1']}}</td>
+                 <td>{{r['option2']}}</td>
+                 <td>{{r['option3']}}</td>
+                 <td>{{r['option4']}}</td>
+               </tr>
+             {% endfor %}
+           </tbody>
+          </table>
+          </div>
+        </main>
+    </div>
+
+<script>
+
+  let subject_select = document.getElementById('subject');
+  let chapter_select = document.getElementById('chapter');
+
+  subject_select.onchange = function(){
+    subject = subject_select.value;
+    fetch ('/get_chapter/'+ subject).then(function(response){
+      response.json().then(function(data){
+        console.table(data);
+        let optionHTML = '';
+        for(let chapter of data.chapters){
+          optionHTML += '<option value="'+chapter.chapterid+'">'+chapter.chapter+'</option>';
+        }
+         chapter_select.innerHTML = optionHTML;
+      });
+    });
+  }
+
+</script>
+  {% endblock %}

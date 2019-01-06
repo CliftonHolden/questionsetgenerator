@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="container">
+    <form class="form-signin" method="POST" action=''>
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <div class="form-group">
+          <label> Username </label>
+          <input type="text" name="username" class="form-control" value={{request.form.username}}>
+        </div>
+        <div class="form-group">
+          <label> Password </label>
+          <input type="password" name="password" class="form-control" value={{request.form.password}}>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+  </div>
+{% endblock %}
