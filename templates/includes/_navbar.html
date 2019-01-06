@@ -1,0 +1,45 @@
+
+<nav class="navbar navbar-expand-md navbar-default bg-light ">
+  <a class="navbar-brand" href="/">Admin Panel</a>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <!--<ul class="navbar-nav mr-auto">
+      <li class="nav-item text-nowrap"><a class="nav-link" href="/">Home</a></li>
+      <li class="nav-item text-nowrap"><a class="nav-link" href="/create">Create</a></li>
+      <li class="nav-item text-nowrap"><a class="nav-link" href="/update">Update</a></li>
+      <li class="nav-item text-nowrap"><a class="nav-link" href="/delete">Delete</a></li>
+      <li class="nav-item text-nowrap"><a class="nav-link" href="/list">List</a></li>
+    </ul>-->
+    <ul class="navbar-nav navbar-right">
+        {% if session.logged_in %}
+         <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+         <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+         {% else %}
+        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        {% endif %}
+    </ul>
+  </div>
+</nav>
+{% if session.logged_in %}
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link " href="/list">
+              <span data-feather="home"></span>
+              List questions
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/bulk_upload">
+              <span data-feather="home"></span>
+              Bulk Upload
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+{% endif %}

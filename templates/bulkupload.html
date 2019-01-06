@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div class="container">
+        <h1>Select Excel file to be uploaded to DB!</h1>
+        {% from 'includes/_formhelpers.html' import render_field %}
+        <form  action="" method="POST" enctype=multipart/form-data>
+          {{form.csrf_token}}
+          <div class="form-group">
+            {{render_field(form.upload, class_="form-control")}}
+          </div>
+          <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+        </form>
+        <button type="button" class="btn btn-secondary" name="Go Back to Listing" onclick="location.href='/list'"> Go back to list
+        </button>
+      </div>
+    </div>
+  </main>
+{% endblock %}
